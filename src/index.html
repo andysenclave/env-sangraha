@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Env Sangraha - Environment File Collector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            padding: 20px;
+            color: #333;
+            margin: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            height: calc(100vh - 40px);
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4a5568;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            flex-shrink: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .directory-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #f7fafc;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .btn-select {
+            background: #4299e1;
+            color: white;
+        }
+
+        .btn-select:hover {
+            background: #3182ce;
+        }
+
+        .btn-process {
+            background: #48bb78;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-process:hover {
+            background: #38a169;
+        }
+
+        .btn-process:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            color: #276749;
+        }
+
+        .status.error {
+            background: #fed7d7;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+        }
+
+        .status.info {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            color: #2c5282;
+        }
+
+        .file-list {
+            margin-top: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            background: #f7fafc;
+            border-radius: 6px;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        .file-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗂️ Env Sangraha</h1>
+        <p style="text-align: center; margin-bottom: 30px; color: #718096;">
+            Collect and archive .env files from your projects
+        </p>
+
+        <div class="form-group">
+            <label for="targetDir">Target Directory (to scan for .env files):</label>
+            <div class="directory-input">
+                <input type="text" id="targetDir" placeholder="Select the directory to scan..." readonly>
+                <button class="btn-select" onclick="selectDirectory('target')">Browse</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="destinationDir">Destination Directory (where to save the archive):</label>
+            <div class="directory-input">
+                <input type="text" id="destinationDir" placeholder="Select where to save the archive..." readonly>
+                <button class="btn-select" onclick="selectDirectory('destination')">Browse</button>
+            </div>
+        </div>
+
+        <button class="btn-process" id="processBtn" onclick="processEnvFiles()" disabled>
+            🔍 Scan & Archive .env Files
+        </button>
+
+        <div id="status"></div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
