@@ -130,6 +130,31 @@ env-backup-my-project-2025-01-20T10-30-45-123Z.zip
 open env-sangraha-1.0.0.dmg
 ```
 
+**⚠️ Running on macOS (Security Settings):**
+Since this app is not signed with an Apple Developer certificate, you may need to allow it to run:
+
+1. **If you see "App can't be opened" dialog:**
+   - Right-click the app and select "Open"
+   - Click "Open" in the confirmation dialog
+
+2. **To allow apps from anywhere (if needed):**
+   ```bash
+   # Open System Preferences > Security & Privacy > General
+   # Or use this command to temporarily allow unsigned apps:
+   sudo spctl --master-disable
+   ```
+   - Go to **System Preferences** → **Security & Privacy** → **General**
+   - Under "Allow apps downloaded from:" select **"Anywhere"**
+   - After installing, you can re-enable the restriction:
+   ```bash
+   sudo spctl --master-enable
+   ```
+
+3. **Alternative method using System Settings (macOS 13+):**
+   - Go to **System Settings** → **Privacy & Security**
+   - Scroll down to **Security** section
+   - Click **"Open Anyway"** next to the blocked app message
+
 **Windows Users:**
 ```bash
 # Download and run the installer
