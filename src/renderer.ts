@@ -63,7 +63,7 @@ async function processEnvFiles() {
 
         // Create archive
         processBtn.textContent = '📦 Creating Archive...';
-        const rootDirName = targetDirectory.split('/').pop() || 'unknown';
+        const rootDirName = targetDirectory ? path.basename(targetDirectory) : 'unknown';
         const result = await window.electronAPI.createArchive(envFiles, destinationDirectory, rootDirName);
 
         if (result.success) {
